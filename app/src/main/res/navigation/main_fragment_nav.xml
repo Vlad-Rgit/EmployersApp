@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_fragment_nav"
+    app:startDestination="@id/navigation_news">
+
+    <fragment
+        android:id="@+id/navigation_news"
+        android:name="com.employersapps.employersapp.presentation.news_fragment.ui.NewsFragment"
+        android:label="NewsFragment" />
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.employersapps.employersapp.presentation.notifications_fragment.ui.NotificationsFragment"
+        android:label="NotificationsFragment" />
+    <fragment
+        android:id="@+id/navigation_employers"
+        android:name="com.employersapps.employersapp.presentation.employers_fragment.ui.EmployersFragment"
+        android:label="EmployersFragment" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.employersapps.employersapp.presentation.profile_fragment.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/navigation_messages"
+        android:name="com.employersapps.employersapp.presentation.messages_fragment.ui.MessagesFragment"
+        android:label="MessagesFragment" />
+</navigation>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/logo_back.xml" value="0.22760416666666666" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/layout/fragment_chat.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_employer_details.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_employers_choice_list.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/layout/fragment_group_chat_details.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_messages.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.31476449275362317" />
+        <entry key="app/src/main/res/layout/item_chat_message.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/item_choice_employer.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/layout/item_employer_group_chat.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/item_list_message.xml" value="0.31476449275362317" />
+        <entry key="app/src/main/res/menu/chat_menu.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/menu/menu_edit_group_chat.xml" value="0.21145833333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.employersapps.employersapp.presentation.start_fragment.ui.StartFragment"
+        android:label="StartFragment" >
+        <action
+            android:id="@+id/action_startFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.employersapps.employersapp.presentation.login_fragment.ui.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.employersapps.employersapp.presentation.main_fragment.ui.MainFragment"
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_notificationDetailsFragment"
+            app:destination="@id/notificationDetailsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_employerDetailsFragment"
+            app:destination="@id/employerDetailsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_employerEditFragment"
+            app:destination="@id/employerEditFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_groupChatDetailsFragment"
+            app:destination="@id/groupChatDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="com.employersapps.employersapp.presentation.news_details_fragment.ui.NewsDetailsFragment"
+        android:label="NewsDetailsFragment" />
+    <fragment
+        android:id="@+id/notificationDetailsFragment"
+        android:name="com.employersapps.employersapp.presentation.notification_details_fragment.ui.NotificationDetailsFragment"
+        android:label="NotificationDetailsFragment" />
+    <fragment
+        android:id="@+id/employerDetailsFragment"
+        android:name="com.employersapps.employersapp.presentation.employer_details_fragment.ui.EmployerDetailsFragment"
+        android:label="EmployerDetailsFragment" >
+        <action
+            android:id="@+id/action_employerDetailsFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.employersapps.employersapp.presentation.chat_fragment.ui.ChatFragment"
+        android:label="ChatFragment" >
+        <action
+            android:id="@+id/action_chatFragment_to_groupChatDetailsFragment"
+            app:destination="@id/groupChatDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/employerEditFragment"
+        android:name="com.employersapps.employersapp.presentation.employer_edit_fragment.ui.EmployerEditFragment"
+        android:label="EmployerEditFragment" />
+    <fragment
+        android:id="@+id/groupChatDetailsFragment"
+        android:name="com.employersapps.employersapp.presentation.group_chat_details.ui.GroupChatDetailsFragment"
+        android:label="GroupChatDetailsFragment" >
+        <action
+            android:id="@+id/action_groupChatDetailsFragment_to_employersChoiceListFragment"
+            app:destination="@id/employersChoiceListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/employersChoiceListFragment"
+        android:name="com.employersapps.employersapp.presentation.employers_choice_list.ui.EmployersChoiceListFragment"
+        android:label="EmployersChoiceListFragment" />
+</navigation>

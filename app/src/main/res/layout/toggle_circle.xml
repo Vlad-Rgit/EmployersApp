@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.employersapps.employersapp.presentation.custom_views.toogle_circle.ToggleCircle xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="8dp"
+    android:layout_height="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:borderColor="@android:color/darker_gray"
+    app:borderWidth="1dp"
+    app:backgroundColorOn="@color/white"
+    app:backgroundColorOff="@android:color/transparent"
+    android:layout_marginEnd="6dp">
+
+
+</com.employersapps.employersapp.presentation.custom_views.toogle_circle.ToggleCircle>

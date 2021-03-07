@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.employersapps.employersapp">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+
+    <application
+        android:allowBackup="true"
+        android:name=".EmployersApp"
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.EmployersApp">
+
+        <activity android:name=".presentation.activities.MainActivity"
+            android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <receiver android:name=".framework.broadcast_receviers.NotificationReceiver"
+            android:enabled="true"
+            android:exported="false"/>
+
+        <receiver android:name=".framework.broadcast_receviers.LocationLoggerReceiver"
+            android:enabled="true"
+            android:exported="false">
+
+        </receiver>
+
+        <service android:name=".framework.services.LocationLoggerService"
+            android:enabled="true"
+            android:exported="true"
+            android:description="@string/location_logger_description"
+            android:label="@string/location_logger_label" >
+            <intent-filter>
+                <action android:name="com.employersapps.employersapp.framework.services.LocationLoggerService"/>
+            </intent-filter>
+        </service>
+
+        <service android:name=".framework.services.NotificationReceiverService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_baseline_message_24" />
+
+
+    </application>
+
+</manifest>

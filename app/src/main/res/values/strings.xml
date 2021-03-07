@@ -1,0 +1,105 @@
+<resources>
+    <string name="app_name">EmployersApp</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="enter">Enter</string>
+    <string name="error_credentials">
+        Error credentials
+    </string>
+    <string name="server_timeout">
+        Server timeout
+    </string>
+    <string name="news">News</string>
+    <string name="employers">Employers</string>
+    <string name="notifications">Notifications</string>
+    <string name="profile">Profile</string>
+    <string name="text">Text</string>
+    <string name="send_news">Send News</string>
+    <string name="employers_app_channel">
+        employersAppChannel
+    </string>
+    <string name="employers_app_channel_desc">
+        Employers Notification
+    </string>
+    <string name="notification_title">
+        Notification
+    </string>
+    <string name="notification">Notification</string>
+    <string name="save">Save</string>
+    <string name="time">Time</string>
+    <string name="date">Date</string>
+    <string name="cancel">Cancel</string>
+    <string name="date_and_time">Date and time</string>
+    <string name="add_news">Add news</string>
+    <string name="set_notification_fire_time">
+        Set notification time
+    </string>
+    <string name="attach_file">Attach file</string>
+    <string name="news_image">News image</string>
+    <string name="remove_image">Delete image</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Delete</string>
+    <string name="employer_image">Employer`s image</string>
+    <string name="last_name">Last name:</string>
+    <string name="first_name">Name:</string>
+    <string name="patronymic">Patronymic:</string>
+    <string name="post">Post:</string>
+    <string name="status">Status:</string>
+    <string name="status_is_hidden">Status is hidden</string>
+    <string name="require_permisson_for_work">
+        Permission for work is required
+    </string>
+    <string name="location_logger_description">
+        LocationLogger
+    </string>
+    <string name="location_logger_label">
+        LocationLogger
+    </string>
+    <string name="publish_status">Publish status</string>
+    <string name="max_images_5">
+        Max images amount is 5
+    </string>
+    <string name="attach_photo">Attach photo</string>
+    <string name="attach">Attach</string>
+    <string name="max_file_size_20mb">
+        Max file size is 20 megabytes
+    </string>
+    <string name="messages">Messages</string>
+    <string name="new_message">New message</string>
+    <string name="message_channel_id">messageChannelId</string>
+    <string name="message_channel_name">Employers Message Channel</string>
+    <string name="message_channel_desc">Messages for Employers</string>
+    <string name="message">Message</string>
+    <string name="sending">Sending...</string>
+    <string name="chat">Chat</string>
+    <string name="download_started">
+        Download has been started
+    </string>
+    <string name="choose_photo">Choose photo</string>
+    <string name="role">Role</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="employer">Employer</string>
+    <string name="title">Title</string>
+    <string name="edit_news">Edit news</string>
+    <string name="start_vacation_date">Start vacation date</string>
+    <string name="end_vacation_date">End vacation date</string>
+    <string name="at_vacation">At vacation</string>
+    <string name="vacation_comment">Vacation comment</string>
+    <string name="enter_vacation_comment">Enter vacation comment</string>
+    <string name="accept">Accept</string>
+    <string name="send_notification">Send notification</string>
+    <string name="choose_logo">Choose logo</string>
+    <string name="chat_name">Chat name</string>
+    <string name="add_employers">Add employers</string>
+    <string name="please_choose_logo">Please choose logo</string>
+    <string name="please_choose_at_least_1_employer">
+        Please choose at least 1 employer
+    </string>
+    <string name="chat_name_is_required">
+        Chat name is required
+    </string>
+    <string name="show_chat_info">Show chat info</string>
+    <string name="edit_chat">Edit chat</string>
+    <string name="employers_in_chat">Employers in chat</string>
+    <string name="delete_chat">Delete chat</string>
+</resources>

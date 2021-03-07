@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/default_padding">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btn_choose_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/choose_photo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/img"/>
+
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="tv_first_name_title, tv_start_vacation_date_title, tv_end_vacation_date_title, tv_post_title, tv_last_name_title"
+                tools:layout_editor_absoluteX="97dp"
+                tools:layout_editor_absoluteY="16dp" />
+
+            <TextView
+                android:id="@+id/tv_last_name_title"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/first_name"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btn_choose_photo" />
+
+
+            <TextView
+                android:id="@+id/tv_first_name"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@+id/barrier_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_last_name_title" />
+
+            <TextView
+                android:id="@+id/tv_first_name_title"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/last_name"
+                app:layout_constraintBottom_toTopOf="@+id/tv_post_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_last_name_title" />
+
+            <TextView
+                android:id="@+id/tv_last_name"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/barrier_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_first_name_title" />
+
+
+            <TextView
+                android:id="@+id/tv_post_title"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/post"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_first_name_title" />
+
+            <TextView
+                android:id="@+id/tv_post"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/barrier_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_post_title" />
+
+
+            <TextView
+                android:id="@+id/tv_status_title"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/status"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_post_title"/>
+
+            <TextView
+                android:id="@+id/tv_status"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintStart_toEndOf="@id/barrier_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_status_title" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switch_location_public"
+                android:text="@string/publish_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_vacation_comment_title"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_start_vacation_date_title"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_vacation_date"
+                app:layout_constraintTop_toBottomOf="@id/tv_status_title"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_end_vacation_date_title"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/end_vacation_date"
+                app:layout_constraintTop_toBottomOf="@id/tv_start_vacation_date_title"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tv_vacation_comment_title"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/vacation_comment"
+                app:layout_constraintTop_toBottomOf="@id/tv_end_vacation_date_title"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/tv_vacation"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constrainedWidth="true"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@id/tv_end_vacation_date"
+                app:layout_constraintTop_toBottomOf="@id/tv_end_vacation_date"/>
+
+
+            <ImageButton
+                android:id="@+id/btn_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:padding="4dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_vacation"
+                app:layout_constraintStart_toEndOf="@id/tv_vacation"
+                app:layout_constraintBottom_toBottomOf="@id/tv_vacation"
+                android:src="@drawable/ic_baseline_create_14"/>
+
+
+            <TextView
+                android:id="@+id/tv_start_vacation_date"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@id/tv_start_vacation_date_title"
+                app:layout_constraintStart_toEndOf="@id/barrier_title"/>
+
+            <TextView
+                android:id="@+id/tv_end_vacation_date"
+                style="@style/TextAppearance.MaterialComponents.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintTop_toTopOf="@id/tv_end_vacation_date_title"
+                app:layout_constraintStart_toEndOf="@id/barrier_title"/>
+
+            <ImageButton
+                android:id="@+id/btn_choose_start_vacation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:padding="4dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_baseline_calendar_today_12"
+                app:layout_constraintTop_toTopOf="@id/tv_start_vacation_date"
+                app:layout_constraintStart_toEndOf="@id/tv_start_vacation_date"/>
+
+
+            <ImageButton
+                android:id="@+id/btn_choose_end_vacation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:padding="4dp"
+                android:backgroundTint="@color/white"
+                android:src="@drawable/ic_baseline_calendar_today_12"
+                app:layout_constraintTop_toTopOf="@id/tv_end_vacation_date"
+                app:layout_constraintStart_toEndOf="@id/tv_end_vacation_date"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>

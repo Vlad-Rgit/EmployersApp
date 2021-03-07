@@ -1,0 +1,18 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+dependencies {
+    
+    //Annotations
+    implementation 'org.jetbrains:annotations:16.0.2'
+
+    //RxJava
+    implementation "io.reactivex.rxjava3:rxjava:3.0.8"
+
+}

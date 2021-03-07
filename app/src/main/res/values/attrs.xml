@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ToggleCircle">
+        <attr name="borderWidth" format="dimension"/>
+        <attr name="borderColor" format="color"/>
+        <attr name="backgroundColorOn" format="color"/>
+        <attr name="backgroundColorOff" format="color"/>
+        <attr name="on" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="ToggleCircleGroup">
+        <attr name="circlesCount" format="integer"/>
+        <attr name="toggleCircleRes" format="reference"/>
+        <attr name="circleOnPosition" format="integer"/>
+    </declare-styleable>
+</resources>
