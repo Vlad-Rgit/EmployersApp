@@ -2,8 +2,11 @@ package com.employersapps.core.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalUnit;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Message implements ListItem<Message> {
 
@@ -67,7 +70,7 @@ public class Message implements ListItem<Message> {
     }
 
     public LocalDateTime getTimestamp() {
-        return timestamp;
+        return timestamp.plus(1, ChronoUnit.HOURS);
     }
 
     public List<MessageAttachment> getMessageAttachments() {
@@ -75,7 +78,8 @@ public class Message implements ListItem<Message> {
     }
 
     public LocalDateTime getFirstReadTimestamp() {
-        return firstReadTimestamp;
+        return firstReadTimestamp == null ? null :
+                firstReadTimestamp.plus(1, ChronoUnit.HOURS);
     }
 
     public long getSenderId() {

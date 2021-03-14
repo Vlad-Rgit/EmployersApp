@@ -10,14 +10,17 @@
         <entry key="app/src/main/res/layout/fragment_employer_details.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_employers_choice_list.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/fragment_group_chat_details.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_marked_messages.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_messages.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.31476449275362317" />
-        <entry key="app/src/main/res/layout/item_chat_message.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/item_chat_message.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_choice_employer.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/layout/item_employer_group_chat.xml" value="0.2" />
         <entry key="app/src/main/res/layout/item_list_message.xml" value="0.31476449275362317" />
         <entry key="app/src/main/res/menu/chat_menu.xml" value="0.21145833333333333" />
         <entry key="app/src/main/res/menu/menu_edit_group_chat.xml" value="0.21145833333333333" />
+        <entry key="app/src/main/res/menu/menu_message.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/menu/menu_messages_toolbar.xml" value="0.21145833333333333" />
       </map>
     </option>
   </component>

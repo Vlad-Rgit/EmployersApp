@@ -43,7 +43,9 @@ public class ParcelableEmployer implements Parcelable {
                 Instant.ofEpochSecond(in.readLong())
                         .atZone(ZoneId.systemDefault())
                         .toLocalDate(),
-                in.readString()
+                in.readString(),
+                in.readByte() == 1,
+                in.readByte() == 1
         );
     }
 
@@ -85,6 +87,9 @@ public class ParcelableEmployer implements Parcelable {
         }
 
         dest.writeString(employer.getVacationComment());
+
+        dest.writeByte(employer.isEnablePrivateChatNotification() ? (byte) 1 : 0);
+        dest.writeByte(employer.isEnableGroupChatNotification() ? (byte) 1 : 0);
     }
 
 

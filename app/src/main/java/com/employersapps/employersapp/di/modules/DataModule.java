@@ -2,10 +2,12 @@ package com.employersapps.employersapp.di.modules;
 
 import com.employersapps.core.data.AdminNotificationsDataSource;
 import com.employersapps.core.data.ChatDataSource;
+import com.employersapps.core.data.ChatMuteStateDataSource;
 import com.employersapps.core.data.EditEmployersDataSource;
 import com.employersapps.core.data.EmployerChangesDataSource;
 import com.employersapps.core.data.EmployersDataSource;
 import com.employersapps.core.data.FmsTokenDataSource;
+import com.employersapps.core.data.MarkedMessageDataSource;
 import com.employersapps.core.data.MessagesDataSource;
 import com.employersapps.core.data.NewsDataSource;
 import com.employersapps.core.data.NotificationDataSource;
@@ -16,6 +18,7 @@ import com.employersapps.core.data.UserCoordsDataSource;
 import com.employersapps.core.data.UserDataSource;
 import com.employersapps.employersapp.framework.data.ApiAdminNotificationDataSource;
 import com.employersapps.employersapp.framework.data.ApiChatDataSource;
+import com.employersapps.employersapp.framework.data.ApiChatMuteStateDataSource;
 import com.employersapps.employersapp.framework.data.ApiEditEmployerDataSource;
 import com.employersapps.employersapp.framework.data.ApiEmployersDataSource;
 import com.employersapps.employersapp.framework.data.ApiFmsTokenDataSource;
@@ -25,6 +28,7 @@ import com.employersapps.employersapp.framework.data.ApiPostsDataSource;
 import com.employersapps.employersapp.framework.data.ApiRolesDataSource;
 import com.employersapps.employersapp.framework.data.ApiUserCoordsDataSource;
 import com.employersapps.employersapp.framework.data.ApiUserDataSource;
+import com.employersapps.employersapp.framework.data.RoomMarkedMessageDataSource;
 import com.employersapps.employersapp.framework.data.RoomNotificationDataSource;
 import com.employersapps.employersapp.framework.data.WebSocketEmployerChangedDataSource;
 import com.employersapps.employersapp.framework.data.WebSocketRealtimeMessagesDataSource;
@@ -87,4 +91,14 @@ public interface DataModule {
 
     @Binds
     ChatDataSource bindChatDataSource(ApiChatDataSource impl);
+
+    @Binds
+    ChatMuteStateDataSource bindChatMuteStateDataSource(
+            ApiChatMuteStateDataSource impl);
+
+    @Binds
+    MarkedMessageDataSource bindMarkedMessageDataSource(
+            RoomMarkedMessageDataSource impl
+    );
+
 }

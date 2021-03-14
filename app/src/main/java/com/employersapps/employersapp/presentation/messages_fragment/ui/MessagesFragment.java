@@ -2,11 +2,13 @@ package com.employersapps.employersapp.presentation.messages_fragment.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -72,10 +74,32 @@ public class MessagesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initToolbar();
         initButtons();
         initSwipeRefresh();
         initRecyclerView();
         observeViewModel();
+    }
+
+    private void initToolbar() {
+        binding.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+
+                if(item.getItemId() == R.id.menu_marked_messages) {
+
+                    Navigation.findNavController(
+                            requireActivity(),
+                            R.id.nav_host
+                    ).navigate(
+                            R.id.action_mainFragment_to_markedMessagesFragment);
+
+                    return true;
+                }
+
+                return false;
+            }
+        });
     }
 
     private void initButtons() {

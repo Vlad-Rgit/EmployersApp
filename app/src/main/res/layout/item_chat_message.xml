@@ -7,6 +7,10 @@
     android:layout_width="match_parent">
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/message_host"
+        android:background="@color/white"
+        app:rippleColor="#A19E9E"
+        android:foreground="#A19E9E"
+        android:clickable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <androidx.constraintlayout.widget.ConstraintLayout

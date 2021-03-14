@@ -20,6 +20,9 @@ public class Employer implements ListItem<Employer>, Serializable {
     private final LocalDate startVacationDate;
     private final LocalDate endVacationDate;
     private final String vacationComment;
+    private final boolean enablePrivateChatNotification;
+    private final boolean enableGroupChatNotification;
+
 
     public Employer(long id,
                     int postId,
@@ -34,7 +37,9 @@ public class Employer implements ListItem<Employer>, Serializable {
                     Status status,
                     LocalDate startVacationDate,
                     LocalDate endVacationDate,
-                    String vacationComment) {
+                    String vacationComment,
+                    boolean enableGroupChatNotification,
+                    boolean enablePrivateChatNotification) {
         this.id = id;
         this.postId = postId;
         this.roleId = roleId;
@@ -49,6 +54,8 @@ public class Employer implements ListItem<Employer>, Serializable {
         this.startVacationDate = startVacationDate;
         this.endVacationDate = endVacationDate;
         this.vacationComment = vacationComment;
+        this.enableGroupChatNotification = enableGroupChatNotification;
+        this.enablePrivateChatNotification = enablePrivateChatNotification;
     }
 
     public Post getPost() {
@@ -91,6 +98,14 @@ public class Employer implements ListItem<Employer>, Serializable {
         return isLocationPublic;
     }
 
+    public boolean isEnableGroupChatNotification() {
+        return enableGroupChatNotification;
+    }
+
+    public boolean isEnablePrivateChatNotification() {
+        return enablePrivateChatNotification;
+    }
+
     public Status getStatus() {
         return status;
     }
@@ -111,7 +126,6 @@ public class Employer implements ListItem<Employer>, Serializable {
     public LocalDate getEndVacationDate() {
         return endVacationDate;
     }
-
 
     @Override
     public boolean equals(Object o) {

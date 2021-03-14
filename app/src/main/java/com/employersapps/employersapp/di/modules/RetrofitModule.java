@@ -2,6 +2,7 @@ package com.employersapps.employersapp.di.modules;
 
 import com.employersapps.employersapp.config.Config;
 import com.employersapps.employersapp.framework.data.JwtAuthInterceptor;
+import com.employersapps.employersapp.framework.data.RetrofitChatMuteStateService;
 import com.employersapps.employersapp.framework.data.RetrofitChatService;
 import com.employersapps.employersapp.framework.data.RetrofitEmployersService;
 import com.employersapps.employersapp.framework.data.RetrofitFmsTokenService;
@@ -103,5 +104,11 @@ public class RetrofitModule {
     @Singleton
     public RetrofitChatService provideChatService(Retrofit retrofit) {
         return retrofit.create(RetrofitChatService.class);
+    }
+
+    @Provides
+    @Singleton
+    public RetrofitChatMuteStateService providerChatMuteStateService(Retrofit retrofit) {
+        return retrofit.create(RetrofitChatMuteStateService.class);
     }
 }

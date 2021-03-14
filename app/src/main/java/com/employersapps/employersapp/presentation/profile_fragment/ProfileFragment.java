@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -166,6 +167,57 @@ public class ProfileFragment extends Fragment {
 
 
 
+        binding.switchEnableGroupChatNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                Employer employer = currentEmployer;
+
+                viewModel.updateEmployer(
+                        new PostEmployer(
+                                employer.getId(),
+                                employer.getLastName(),
+                                employer.getFirstName(),
+                                employer.getLogin(),
+                                "",
+                                employer.getPostId(),
+                                employer.getRoleId(),
+                                employer.getStartVacationDate(),
+                                employer.getEndVacationDate(),
+                                employer.getVacationComment(),
+                                employer.isEnablePrivateChatNotification(),
+                                isChecked
+                        )
+                );
+            }
+        });
+
+        binding.switchEnablePrivateChatNotification.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                Employer employer = currentEmployer;
+
+                viewModel.updateEmployer(
+                        new PostEmployer(
+                                employer.getId(),
+                                employer.getLastName(),
+                                employer.getFirstName(),
+                                employer.getLogin(),
+                                "",
+                                employer.getPostId(),
+                                employer.getRoleId(),
+                                employer.getStartVacationDate(),
+                                employer.getEndVacationDate(),
+                                employer.getVacationComment(),
+                                isChecked,
+                                employer.isEnableGroupChatNotification()
+                        )
+                );
+            }
+        });
+
+
         binding.btnChoosePhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -187,9 +239,9 @@ public class ProfileFragment extends Fragment {
 
                 if(employer != null) {
                     LocalDate date;
-
+                    LocalDate now = LocalDate.now();
                     if(employer.getStartVacationDate() == null) {
-                        date = LocalDate.now();
+                        date = now;
                     }
                     else {
                         date = employer.getStartVacationDate();
@@ -201,6 +253,17 @@ public class ProfileFragment extends Fragment {
                                 @Override
                                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                     LocalDate newDate = LocalDate.of(year, month + 1, dayOfMonth);
+
+                                    if(newDate.isBefore(now)) {
+                                        showMessage("Start date cannot be before today");
+                                        return;
+                                    }
+                                    else if(employer.getEndVacationDate() != null &&
+                                        newDate.isAfter(employer.getEndVacationDate())) {
+                                        showMessage("Start Date cannot be after end date");
+                                        return;
+                                    }
+
                                     viewModel.updateEmployer(
                                             new PostEmployer(
                                                     employer.getId(),
@@ -212,7 +275,9 @@ public class ProfileFragment extends Fragment {
                                                     employer.getRoleId(),
                                                     newDate,
                                                     employer.getEndVacationDate(),
-                                                    employer.getVacationComment()
+                                                    employer.getVacationComment(),
+                                                    employer.isEnablePrivateChatNotification(),
+                                                    employer.isEnableGroupChatNotification()
                                             )
                                     );
 
@@ -231,11 +296,14 @@ public class ProfileFragment extends Fragment {
             public void onClick(View v) {
                 Employer employer = currentEmployer;
 
+                LocalDate now = LocalDate.now();
+
                 if (employer != null) {
+
                     LocalDate date;
 
                     if (employer.getStartVacationDate() == null) {
-                        date = LocalDate.now();
+                        date = now;
                     } else {
                         date = employer.getStartVacationDate();
                     }
@@ -246,6 +314,17 @@ public class ProfileFragment extends Fragment {
                                 @Override
                                 public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                     LocalDate newDate = LocalDate.of(year, month + 1, dayOfMonth);
+
+                                    if(newDate.isBefore(now)) {
+                                        showMessage("End date cannot be before today");
+                                        return;
+                                    }
+                                    else if(employer.getStartVacationDate() != null &&
+                                            newDate.isBefore(employer.getStartVacationDate())) {
+                                        showMessage("End date cannot be before start date");
+                                        return;
+                                    }
+
                                     viewModel.updateEmployer(
                                             new PostEmployer(
                                                     employer.getId(),
@@ -257,7 +336,9 @@ public class ProfileFragment extends Fragment {
                                                     employer.getRoleId(),
                                                     employer.getStartVacationDate(),
                                                     newDate,
-                                                    employer.getVacationComment()
+                                                    employer.getVacationComment(),
+                                                    employer.isEnablePrivateChatNotification(),
+                                                    employer.isEnableGroupChatNotification()
                                             )
                                     );
 
@@ -308,7 +389,9 @@ public class ProfileFragment extends Fragment {
                                             employer.getRoleId(),
                                             employer.getStartVacationDate(),
                                             employer.getEndVacationDate(),
-                                            edComment.getText().toString()
+                                            edComment.getText().toString(),
+                                            employer.isEnablePrivateChatNotification(),
+                                            employer.isEnableGroupChatNotification()
                                     ));
                                 }
                             })
@@ -322,6 +405,14 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void showMessage(String message) {
+        Toast.makeText(
+                requireContext(),
+                message,
+                Toast.LENGTH_SHORT
+        ).show();
     }
 
     private void observerViewModel() {
@@ -361,6 +452,8 @@ public class ProfileFragment extends Fragment {
         binding.tvLastName.setText(employer.getLastName());
         binding.tvPost.setText(employer.getPost().getName());
         binding.tvVacation.setText(employer.getVacationComment());
+        binding.switchEnableGroupChatNotification.setChecked(employer.isEnableGroupChatNotification());
+        binding.switchEnablePrivateChatNotification.setChecked(employer.isEnablePrivateChatNotification());
 
         DateTimeFormatter format = DateTimeFormatter.ISO_DATE;
 

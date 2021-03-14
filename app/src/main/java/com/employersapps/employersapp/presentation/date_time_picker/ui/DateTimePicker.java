@@ -240,7 +240,6 @@ public class DateTimePicker extends DialogFragment {
                 }
             }
 
-
             DatePicker datePicker = new DatePicker(requireContext());
 
             datePicker.init(initDate.getYear(),

@@ -84,7 +84,7 @@
     <string name="start_vacation_date">Start vacation date</string>
     <string name="end_vacation_date">End vacation date</string>
     <string name="at_vacation">At vacation</string>
-    <string name="vacation_comment">Vacation comment</string>
+    <string name="vacation_comment">Comment</string>
     <string name="enter_vacation_comment">Enter vacation comment</string>
     <string name="accept">Accept</string>
     <string name="send_notification">Send notification</string>
@@ -98,8 +98,13 @@
     <string name="chat_name_is_required">
         Chat name is required
     </string>
+    <string name="mute_chat">Mute chat</string>
+    <string name="unmute_chat">Unmute chat</string>
     <string name="show_chat_info">Show chat info</string>
     <string name="edit_chat">Edit chat</string>
     <string name="employers_in_chat">Employers in chat</string>
     <string name="delete_chat">Delete chat</string>
+    <string name="enable_private_chats_notification">Enable private chats notification</string>
+    <string name="enable_group_chats_notifications">Enable group chats notifications</string>
+    <string name="mark_message">Mark message</string>
 </resources>

@@ -44,6 +44,9 @@
         <action
             android:id="@+id/action_mainFragment_to_groupChatDetailsFragment"
             app:destination="@id/groupChatDetailsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_markedMessagesFragment"
+            app:destination="@id/markedMessagesFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsDetailsFragment"
@@ -85,4 +88,8 @@
         android:id="@+id/employersChoiceListFragment"
         android:name="com.employersapps.employersapp.presentation.employers_choice_list.ui.EmployersChoiceListFragment"
         android:label="EmployersChoiceListFragment" />
+    <fragment
+        android:id="@+id/markedMessagesFragment"
+        android:name="com.employersapps.employersapp.presentation.marked_messages_fragment.ui.MarkedMessagesFragment"
+        android:label="MarkedMessagesFragment" />
 </navigation>

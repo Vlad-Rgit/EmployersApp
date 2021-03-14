@@ -22,6 +22,7 @@ import com.employersapps.employersapp.presentation.employers_choice_list.viewmod
 import com.employersapps.employersapp.presentation.employers_fragment.viewmodel.EmployersViewModel;
 import com.employersapps.employersapp.presentation.group_chat_details.viewmodel.GroupChatDetailsViewModel;
 import com.employersapps.employersapp.presentation.login_fragment.viewmodel.LoginFragmentViewModel;
+import com.employersapps.employersapp.presentation.marked_messages_fragment.viewmodel.MarkedMessagesViewModel;
 import com.employersapps.employersapp.presentation.messages_fragment.viewmodel.MessagesViewModel;
 import com.employersapps.employersapp.presentation.news_details_fragment.viewmodel.NewsDetailsViewModel;
 import com.employersapps.employersapp.presentation.news_fragment.viewmodel.NewsFragmentViewModel;
@@ -59,6 +60,7 @@ public interface AppComponent {
     void inject(EmployerEditViewModel viewModel);
     void inject(EmployersChoiceListViewModel viewModel);
     void inject(GroupChatDetailsViewModel viewModel);
+    void inject(MarkedMessagesViewModel viewModel);
 
 
     Gson getGson();

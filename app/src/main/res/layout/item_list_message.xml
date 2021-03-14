@@ -41,7 +41,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             tools:text="Body"
-            android:maxLines="1"
+            android:maxLines="2"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintTop_toBottomOf="@id/tv_sender_name"
             app:layout_constraintStart_toEndOf="@id/img"

@@ -9,14 +9,19 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.employersapps.core.data.ChatDataSource;
+import com.employersapps.core.data.ChatMuteStateDataSource;
 import com.employersapps.core.data.EmployerChangesDataSource;
+import com.employersapps.core.data.MarkedMessageDataSource;
 import com.employersapps.core.data.MessagesDataSource;
 import com.employersapps.core.data.RealtimeMessagesDataSource;
 import com.employersapps.core.data.UserDataSource;
 import com.employersapps.core.domain.Chat;
+import com.employersapps.core.domain.ChatMuteState;
 import com.employersapps.core.domain.Employer;
+import com.employersapps.core.domain.MarkedMessage;
 import com.employersapps.core.domain.Message;
 import com.employersapps.core.domain.MessageAttachment;
+import com.employersapps.core.domain.network.PostMuteState;
 import com.employersapps.core.domain.network.ServerResponse;
 import com.employersapps.core.utils.Deferrable;
 import com.employersapps.core.utils.IntentIsNotSupportedException;
@@ -34,6 +39,7 @@ import com.employersapps.employersapp.presentation.chat_fragment.state.ListState
 import com.employersapps.employersapp.presentation.chat_fragment.state.MessageAttachmentsState;
 import com.employersapps.employersapp.presentation.chat_fragment.state.ReceiverState;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -54,7 +60,9 @@ public class ChatViewModel extends AndroidViewModel {
     private UserDataSource userDataSource;
     private RealtimeMessagesDataSource realtimeMessagesDataSource;
     private MessagesDataSource messagesDataSource;
+    private MarkedMessageDataSource markedMessageDataSource;
     private ChatDataSource chatDataSource;
+    private ChatMuteStateDataSource chatMuteStateDataSource;
     private long currentUserId;
     private long endpointUserId;
     private Chat chat;
@@ -64,9 +72,12 @@ public class ChatViewModel extends AndroidViewModel {
 
     private List<MessageAttachment> messageAttachments = Collections.emptyList();
 
+
     private final MutableLiveData<ChatFragmentState> chatState = new MutableLiveData<>();
     private final MutableLiveData<ChatFragmentState> state = new MutableLiveData<>();
     private final MutableLiveData<ReceiverState> receiverState = new MutableLiveData<>();
+    private final MutableLiveData<ChatMuteState> chatMuteState = new MutableLiveData<>();
+
 
     public ChatViewModel(@NonNull Application application) {
         super(application);
@@ -115,6 +126,16 @@ public class ChatViewModel extends AndroidViewModel {
             compositeDisposable.add(disposableEmployerChanges);
         }
         else {
+
+
+            chatMuteStateDataSource.getState(chat.getId(), currentUserId)
+                    .onComplete(new Deferrable.OnCompleteCallback<ChatMuteState>() {
+                        @Override
+                        public void onComplete(ChatMuteState result) {
+                            chatMuteState.postValue(result);
+                        }
+                    });
+
             chatState.postValue(new ChatState(chat));
         }
 
@@ -163,6 +184,30 @@ public class ChatViewModel extends AndroidViewModel {
                         }
                     });
         }
+    }
+
+    public LiveData<ChatMuteState> getChatMuteState() {
+        return chatMuteState;
+    }
+
+
+    public void updateMuteState(boolean newState) {
+        chatMuteStateDataSource.updateState(new PostMuteState(
+                currentUserId,
+                chat.getId(),
+                newState
+        )).onComplete(new Deferrable.OnCompleteCallback<PostMuteState>() {
+            @Override
+            public void onComplete(PostMuteState result) {
+                chatMuteState.postValue(new ChatMuteState(result.isEnableNotification()));
+            }
+        });
+    }
+
+
+    @Inject
+    public void setMarkedMessageDataSource(MarkedMessageDataSource markedMessageDataSource) {
+        this.markedMessageDataSource = markedMessageDataSource;
     }
 
     public void init(long chatId) {
@@ -223,6 +268,55 @@ public class ChatViewModel extends AndroidViewModel {
         postState(new MessageAttachmentsState(newState));
     }
 
+
+    public void addMarkedMessage(Message message) {
+
+        long senderId = 0;
+        String senderName = null;
+        String logo = null;
+
+        if(chat.isPrivate()) {
+            if(currentUserId != chat.getUsers().get(0).getId()) {
+                senderId = chat.getUsers().get(0).getId();
+                senderName = chat.getUsers().get(0).getFullName();
+                logo = chat.getUsers().get(0).getPhotoPath();
+            }
+            else if(currentUserId != chat.getUsers().get(1).getId()) {
+                senderId = chat.getUsers().get(1).getId();
+                senderName = chat.getUsers().get(1).getFullName();
+                logo = chat.getUsers().get(1).getPhotoPath();
+            }
+        }
+        else {
+            senderId = chat.getId();
+            senderName  = chat.getName();
+            logo = chat.getLogoPath();
+        }
+
+
+        MarkedMessage markedMessage = new MarkedMessage(
+                message.getId(),
+                senderId,
+                message.getChatId(),
+                message.getText(),
+                senderName,
+                logo,
+                message.getTimestamp(),
+                chat.getName(),
+                message.getFirstReadTimestamp(),
+                chat.isPrivate()
+        );
+
+
+        markedMessageDataSource.addMessage(markedMessage)
+                .subscribeOn(Schedulers.io())
+            .subscribe();
+    }
+
+    @Inject
+    public void setChatMuteStateDataSource(ChatMuteStateDataSource chatMuteStateDataSource) {
+        this.chatMuteStateDataSource = chatMuteStateDataSource;
+    }
 
     @Inject
     public void setChatDataSource(ChatDataSource chatDataSource) {

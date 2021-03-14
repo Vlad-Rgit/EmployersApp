@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.employersapps.core.domain.Chat;
+import com.employersapps.core.domain.ChatMuteState;
 import com.employersapps.core.domain.Employer;
+import com.employersapps.core.domain.Message;
 import com.employersapps.core.domain.MessageAttachment;
 import com.employersapps.core.utils.StateIsNotSupported;
 import com.employersapps.employersapp.R;
@@ -60,11 +63,14 @@ public class ChatFragment extends Fragment {
     private static final int CODE_REQUEST_WRITE_PERMISSION = 3;
     private static final int CODE_REQUEST_PICK_FILE = 2;
 
+    private static final int MENU_MUTE_STATE_ID = 4;
+
     public static final String KEY_CHAT_ID = "keyChatId";
 
     private FragmentChatBinding binding;
     private ChatViewModel viewModel;
     private ChatAdapter chatAdapter;
+    private ChatMuteState chatMuteState;
     private boolean receivedChat = false;
 
     private MessageAttachment pendingDownload;
@@ -91,6 +97,7 @@ public class ChatFragment extends Fragment {
         chatAdapter = new ChatAdapter();
         chatAdapter.setCurrentUserId(viewModel.getCurrentUserId());
         chatAdapter.setOnAttachmentClickedListener(this::startDownloadAttachment);
+        chatAdapter.setOnMarkClicked(this::markMessage);
 
         attachmentsAdapter = new AttachmentsAdapter();
 
@@ -100,6 +107,10 @@ public class ChatFragment extends Fragment {
                 viewModel.sendIntent(new RemoveAttachmentIntent(messageAttachment));
             }
         });
+    }
+
+    private void markMessage(Message message) {
+        viewModel.addMarkedMessage(message);
     }
 
     private void startDownloadAttachment(MessageAttachment messageAttachment) {
@@ -352,6 +363,13 @@ public class ChatFragment extends Fragment {
 
     private void observeViewModel() {
 
+        viewModel.getChatMuteState().observe(getViewLifecycleOwner(), new Observer<ChatMuteState>() {
+            @Override
+            public void onChanged(ChatMuteState chatMuteState) {
+                renderChatMuteState(chatMuteState);
+            }
+        });
+
         viewModel.getChatState().observe(getViewLifecycleOwner(), new Observer<ChatFragmentState>() {
             @Override
             public void onChanged(ChatFragmentState state) {
@@ -372,6 +390,37 @@ public class ChatFragment extends Fragment {
                 render(state);
             }
         });
+    }
+
+    private void renderChatMuteState(ChatMuteState state) {
+
+        int res = 0;
+
+        chatMuteState = state;
+
+        if(state.getState()) {
+            res = R.string.mute_chat;
+        }
+        else {
+            res = R.string.unmute_chat;
+        }
+
+        Menu menu = binding.toolbar.getMenu();
+
+        MenuItem menuMute = menu.findItem(MENU_MUTE_STATE_ID);
+
+        if(menuMute == null) {
+            menu.add(
+                    0,
+                    MENU_MUTE_STATE_ID,
+                    0,
+                    res
+            );
+        }
+        else {
+            menuMute.setTitle(res);
+        }
+
     }
 
     private void render(ChatFragmentState state) {
@@ -410,6 +459,11 @@ public class ChatFragment extends Fragment {
         chat = state.getChat();
 
         chatAdapter.setPrivateChat(chat.isPrivate());
+
+        if(chat.isPrivate()) {
+            return;
+        }
+
 
         binding.tvReceiverName.setText(chat.getName());
         binding.tvReceiverStatus.setVisibility(View.GONE);
@@ -470,10 +524,16 @@ public class ChatFragment extends Fragment {
                     case R.id.menu_edit_chat: editChat();
                         return true;
                     case R.id.menu_delete_chat: deleteChat();
+                    case MENU_MUTE_STATE_ID: changeMuteState();
+                        return true;
                 }
                 return false;
             }
         });
+    }
+
+    private void changeMuteState() {
+        viewModel.updateMuteState(!chatMuteState.getState());
     }
 
     private void deleteChat() {

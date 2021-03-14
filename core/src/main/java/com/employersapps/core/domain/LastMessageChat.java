@@ -3,6 +3,7 @@ package com.employersapps.core.domain;
 
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 public class LastMessageChat implements ListItem<LastMessageChat> {
@@ -101,7 +102,7 @@ public class LastMessageChat implements ListItem<LastMessageChat> {
     }
 
     public LocalDateTime getTimestamp() {
-        return timestamp;
+        return timestamp.plus(1, ChronoUnit.HOURS);
     }
 
     public boolean isInPrivateChat() {

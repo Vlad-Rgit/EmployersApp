@@ -33,6 +33,9 @@ import com.employersapps.employersapp.EmployersApp;
 import com.employersapps.employersapp.framework.broadcast_receviers.LocationLoggerReceiver;
 import com.employersapps.employersapp.framework.util.AndroidNotificationHelper;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import javax.inject.Inject;
 
 public class LocationLoggerService extends Service {
@@ -56,6 +59,7 @@ public class LocationLoggerService extends Service {
 
                 UserCoords coords = new UserCoords(
                         userId,
+                        LocalDateTime.now(ZoneId.of("EET")),
                         location.getLongitude(),
                         location.getLatitude()
                 );

@@ -13,6 +13,8 @@ public class PostEmployer {
     public final LocalDate startVacationDate;
     public final LocalDate endVacationDate;
     public final String vacationComment;
+    public final boolean enablePrivateChatNotification;
+    public final boolean enableGroupChatNotification;
 
     public PostEmployer(long id,
                         String lastName,
@@ -23,7 +25,9 @@ public class PostEmployer {
                         int roleId,
                         LocalDate startVacationDate,
                         LocalDate endVacationDate,
-                        String vacationComment) {
+                        String vacationComment,
+                        boolean enablePrivateChatNotification,
+                        boolean enableGroupChatNotification) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -34,6 +38,8 @@ public class PostEmployer {
         this.startVacationDate = startVacationDate;
         this.endVacationDate = endVacationDate;
         this.vacationComment = vacationComment;
+        this.enableGroupChatNotification = enableGroupChatNotification;
+        this.enablePrivateChatNotification = enablePrivateChatNotification;
     }
 
     public PostEmployer(String lastName,
@@ -55,5 +61,7 @@ public class PostEmployer {
         this.startVacationDate = startVacationDate;
         this.endVacationDate = endVacationDate;
         this.vacationComment = vacationComment;
+        this.enableGroupChatNotification = true;
+        this.enablePrivateChatNotification = true;
     }
 }

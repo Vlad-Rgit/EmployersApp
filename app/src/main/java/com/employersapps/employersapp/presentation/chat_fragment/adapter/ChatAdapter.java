@@ -2,10 +2,12 @@ package com.employersapps.employersapp.presentation.chat_fragment.adapter;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
@@ -38,10 +40,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         void onAttachmentClicked(MessageAttachment messageAttachment);
     }
 
+    public interface OnMessageClickedListener {
+        void onMessageClicked(Message message);
+    }
+
     private List<Message> items = Collections.emptyList();
     private long currentUserId;
 
     private OnAttachmentClickedListener onAttachmentClickedListener;
+    private OnMessageClickedListener onMarkClicked;
     private boolean isPrivateChat = true;
 
 
@@ -51,6 +58,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
 
     public void setOnAttachmentClickedListener(OnAttachmentClickedListener onAttachmentClickedListener) {
         this.onAttachmentClickedListener = onAttachmentClickedListener;
+    }
+
+    public void setOnMarkClicked(OnMessageClickedListener onMarkClicked) {
+        this.onMarkClicked = onMarkClicked;
     }
 
     @NonNull
@@ -69,6 +80,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
             public void onAttachmentClicked(MessageAttachment messageAttachment) {
                 if(onAttachmentClickedListener  != null) {
                     onAttachmentClickedListener.onAttachmentClicked(messageAttachment);
+                }
+            }
+        });
+
+        holder.setOnMarkClicked(new OnMessageClickedListener() {
+            @Override
+            public void onMessageClicked(Message message) {
+                if(onMarkClicked != null) {
+                    onMarkClicked.onMessageClicked(message);
                 }
             }
         });
@@ -102,7 +122,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         private final ItemChatMessageBinding binding;
         private final long currentUserId;
-
+        private OnMessageClickedListener onMarkClicked;
+        private Message currentMessage;
         private OnAttachmentClickedListener onAttachmentClickedListener;
 
         public void setOnAttachmentClickedListener(OnAttachmentClickedListener onAttachmentClickedListener) {
@@ -113,6 +134,38 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
             super(binding.getRoot());
             this.binding = binding;
             this.currentUserId = currentUserId;
+
+            binding.messageHost.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    PopupMenu menu = new PopupMenu(
+                            v.getContext(),
+                            v
+                    );
+
+                    menu.inflate(R.menu.menu_message);
+
+
+                    menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+
+                            if(item.getItemId() == R.id.menu_mark_message &&
+                                onMarkClicked != null) {
+                                onMarkClicked.onMessageClicked(currentMessage);
+                                return true;
+                            }
+
+                            return false;
+
+                        }
+                    });
+
+                    menu.show();
+
+                    return false;
+                }
+            });
 
             binding.rvAttachments.setHasFixedSize(true);
             binding.rvAttachments.setLayoutManager(new LinearLayoutManager(
@@ -126,6 +179,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
                     .getDimensionPixelSize(R.dimen.default_padding) / 2;
 
             binding.rvAttachments.addItemDecoration(new PaddingDecorator(0, 0, padding, 0));
+        }
+
+        public void setOnMarkClicked(OnMessageClickedListener onMarkClicked) {
+            this.onMarkClicked = onMarkClicked;
         }
 
         private DateTimeFormatter getBestDateFormatter(LocalDateTime timestamp) {
@@ -145,6 +202,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
         }
 
         public void bind(Message message, boolean isPrivateChat) {
+
+            currentMessage = message;
 
             binding.tvText.setText(message.getText());
 

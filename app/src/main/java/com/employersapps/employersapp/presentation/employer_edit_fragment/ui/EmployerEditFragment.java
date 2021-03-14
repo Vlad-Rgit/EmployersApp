@@ -85,7 +85,9 @@ public class EmployerEditFragment extends Fragment {
                         employer.getRoleId(),
                         employer.getStartVacationDate(),
                         employer.getEndVacationDate(),
-                        employer.getVacationComment()
+                        employer.getVacationComment(),
+                        true,
+                        true
                 );
                 photoPath = employer.getPhotoPath();
                 isEdit = true;
@@ -433,7 +435,9 @@ public class EmployerEditFragment extends Fragment {
                     role.id,
                     editableEmployer.startVacationDate,
                     editableEmployer.endVacationDate,
-                    editableEmployer.vacationComment
+                    editableEmployer.vacationComment,
+                    true,
+                    true
             );
         }
         else {

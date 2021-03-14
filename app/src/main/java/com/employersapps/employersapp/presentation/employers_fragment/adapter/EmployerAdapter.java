@@ -231,13 +231,17 @@ public class EmployerAdapter extends RecyclerView.Adapter<EmployerAdapter.Employ
         }
 
         public void bind(Employer employer) {
+
             currentEmployer = employer;
+
+            LocalDate now = LocalDate.now();
 
             if(employer.getStartVacationDate() == null ||
                 employer.getEndVacationDate() == null) {
                 binding.tvAtVacation.setVisibility(View.GONE);
             }
-            else if(employer.getEndVacationDate().isAfter(LocalDate.now())) {
+            else if(employer.getEndVacationDate().isAfter(now) ||
+                        employer.getEndVacationDate().isEqual(now)) {
                 binding.tvAtVacation.setVisibility(View.VISIBLE);
             }
             else {

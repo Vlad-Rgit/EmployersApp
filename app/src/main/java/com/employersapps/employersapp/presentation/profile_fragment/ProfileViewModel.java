@@ -129,7 +129,9 @@ public class ProfileViewModel extends AndroidViewModel {
                         employer.getRoleId(),
                         employer.getStartVacationDate(),
                         employer.getEndVacationDate(),
-                        employer.getVacationComment()
+                        employer.getVacationComment(),
+                        employer.isEnablePrivateChatNotification(),
+                        employer.isEnableGroupChatNotification()
                 ),
                 uri.toString()
         );
